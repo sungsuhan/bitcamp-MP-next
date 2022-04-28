@@ -22,7 +22,7 @@ const HomeIcon = createSvgIcon(
 );
 
 const pages = ['카운터', '계산기', 'BMI', '게시판'];
-const preSettings = ['회원가입', '로그인'];
+const preSettings = ['회원가입', '로그인', '프로필'];
 const postSettings = ['프로필', '정보수정', '로그아웃', '회원탈퇴'];
 
 export function Nav(){
@@ -45,10 +45,12 @@ export function Nav(){
 
   const handleCloseUserMenu = (value) => {
     switch(value) {
-      case '회원가입':  window.location.href='/user/join' 
+      case '회원가입':  window.location.href='/auth/register' 
                       break;
-      case '로그인':  window.location.href='/user/login' 
+      case '로그인':  window.location.href='/auth/login' 
                       break;
+      case '프로필':  window.location.href='/user/profile' 
+                      break;                
       default: window.location.href='/'
                       break;
     }
@@ -60,8 +62,8 @@ export function Nav(){
   useEffect(() => {
     const loginUser = localStorage.getItem("loginUser")
     if (loginUser === null) {
-      setUserUrls(["/user/join","/user/login"])
-      setUserSubTitle(["회원가입","로그인"])
+      setUserUrls(["/auth/register","/auth/login","/user/profile"])
+      setUserSubTitle(["회원가입","로그인","프로필"])
     } else {
       setUserUrls(["/user/logout","/user/profile","/user/modifyUser","/user/delUser","user/getUsers"])
       setUserSubTitle(["로그아웃","프로필","회원수정","회원탈퇴","회원목록"])
@@ -97,16 +99,18 @@ export function Nav(){
   const handleAuth = (value) => {
     alert('handleAuth '+value)
     switch(value) {
-      case '회원가입':  window.location.href='/user/join' 
+      case '회원가입':  window.location.href='/auth/register' 
                       break;
-      case '로그인':  window.location.href='/user/login' 
+      case '로그인':  window.location.href='/auth/login' 
+                      break;
+      case '프로필':  window.location.href='/user/profile' 
                       break;
       default: window.location.href='/'
                       break;
     }
   }
   return (
-    <AppBar position="static" style={{marginBottom:"70px"}}>
+    <AppBar position="static" style={{marginBottom:"20px"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography

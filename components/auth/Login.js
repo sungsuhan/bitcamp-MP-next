@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Head from 'next/head';
 
 function Copyright(props) {
   return (
@@ -28,18 +29,12 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export function Login({onSubmit, onChange, form}) {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
-
+export function Login({onChange, onSubmit}){
   return (
     <ThemeProvider theme={theme}>
+    <Head>
+    <title>로그인</title>
+    </Head>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -56,16 +51,17 @@ export function Login({onSubmit, onChange, form}) {
           <Typography component="h1" variant="h5">
             로그인
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form"  noValidate sx={{ mt: 1 }} onSubmit={onSubmit}>
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="userid"
               label="사용자ID"
-              name="email"
+              name="userid"
               autoComplete="email"
               autoFocus
+              onChange={onChange}
             />
             <TextField
               margin="normal"
@@ -76,6 +72,7 @@ export function Login({onSubmit, onChange, form}) {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={onChange}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
