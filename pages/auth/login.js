@@ -18,6 +18,7 @@ const LoginPage = () => {
         e.preventDefault()
         alert('로그인정보: '+JSON.stringify(user))
         dispatch(loginRequest(user))
+        window.location.href="/"
     }
 
   return (
