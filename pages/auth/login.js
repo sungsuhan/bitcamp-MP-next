@@ -1,31 +1,30 @@
 import React, {useState} from 'react';
-import { useDispatch } from 'react-redux';
-import { connect } from 'react-redux';
-import { loginRequest, logoutRequest } from '@/modules/auth/login';
-import { Login } from '@/components/auth/Login';
+import {connect, useDispatch} from 'react-redux';
+import {loginRequest} from '@/modules/auth/login';
+import {Login} from '@/components';
+import {useRouter} from "next/router"
+import { round } from 'lodash';
 
-const LoginPage = () => {
-    const [user, setUser] = useState({
-        userid:'', password:''
-    })
+const LoginPage = ({}) => {
+    const [user, setUser] = useState({userid: '', password: ''})
     const dispatch = useDispatch()
-    const onChange = e =>{
+    const router = useRouter()
+    const onChange = e => {
         e.preventDefault()
-        const{name, value} = e.target;
-        setUser({...user,[name]: value})
+        const {name, value} = e.target;
+        setUser({
+            ...user,
+            [name]: value
+        })
     }
     const onSubmit = e => {
         e.preventDefault()
-        alert('로그인정보: '+JSON.stringify(user))
+        alert(`로그인 정보 ${JSON.stringify(user)}`)
         dispatch(loginRequest(user))
-        window.location.href="/"
+        router.push('/user/profile')
     }
-
-  return (
-    <Login onChange={onChange} onSubmit={onSubmit} />
-  );
+    return (<Login onChange={onChange} onSubmit={onSubmit}/>);
 };
-
-const mapStateToProps = state => ({isLoggined: state.login.isLoggined})
-const loginActions = {loginRequest, logoutRequest}
-export default connect(mapStateToProps, loginActions)(LoginPage)
+const mapStateToProps = state => ({loginUser: state.login.loginUser})
+const loginActions = {loginRequest}
+export default connect(mapStateToProps, loginActions)(LoginPage);
