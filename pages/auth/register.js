@@ -1,38 +1,33 @@
 import React, {useState} from 'react';
-import { useDispatch, connect } from 'react-redux';
-import { registerRequest, unregisterRequest } from '@/modules/auth/register';
-import { Register } from '@/components';
+import {useDispatch, connect} from 'react-redux';
+import {registerRequest} from '@/modules/auth/register';
+import {Register} from '@/components/auth/Register';
 
 const RegisterPage = () => {
-    const [user, setUser] =useState({
-        userid:'', password:'', email:'', name:'', phone:'', birth:'', address:''
+    const [user, setUser] = useState({
+        userid: '',
+        password: '',
+        email: '',
+        name: '',
+        phone: '',
+        birth: '',
+        address: ''
     })
     const dispatch = useDispatch()
-    const onChange = e =>{
+    const onChange = e => {
         e.preventDefault()
-        const{name, value} = e.target;
-        setUser({...user,[name]: value})
+        const {name, value} = e.target;
+        setUser({
+            ...user,
+            [name]: value
+        })
     }
     const onSubmit = e => {
         e.preventDefault()
-        alert('회원가입정보: '+JSON.stringify(user))
         dispatch(registerRequest(user))
     }
-  return (
-    <Register onChange={onChange} onSubmit={onSubmit}  />
-  );
+    return (<Register onChange={onChange} onSubmit={onSubmit}/>);
 };
-
-const mapStateToProps = state => ({ isRegisterd: state.register.isRegisterd })
-const registerActions = {registerRequest, unregisterRequest}
-
-export default connect(mapStateToProps, registerActions)(RegisterPage)
-/*
-export default connect(
-  state => ({
-    user: state.user
-  }),
-  { 
-    userRegister
-  }
-)(RegisterPage);*/
+const mapStateToProps = state => ({isRegistered: state.register.isRegistered});
+const registerActions = {registerRequest}
+export default connect(mapStateToProps, registerActions)(RegisterPage);

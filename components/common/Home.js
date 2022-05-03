@@ -11,7 +11,7 @@ export function Home() {
         <div
             className={styles.w3DisplayMiddle + ' ' + styles.w3PaddingLarge + ' ' + styles.w3Border + ' ' + styles.w3Wide + ' ' + styles.w3TextLightGrey + ' ' + styles.w3Center}>
             <h1 className={styles.w3HideMedium+ ' ' +styles.w3HideSmall+ ' ' +styles.w3Xxxlarge}>JANE DOE</h1>
-            <h5 className={styles.w3HideLarge} style={{whiteSpace:"nowrap"}}>JANE DOE</h5>
+            <h5 className={styles.w3HideLarge} >JANE DOE</h5>
             <h3 className={styles.w3HideMedium+ ' ' +styles.w3HideSmall}>PHOTOGRAPHER</h3>
         </div>
 
