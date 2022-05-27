@@ -52,9 +52,9 @@ export function Login({onChange, onSubmit}){
               margin="normal"
               required
               fullWidth
-              id="userid"
+              id="username"
               label="사용자ID"
-              name="userid"
+              name="username"
               autoComplete="email"
               autoFocus
               onChange={onChange}
